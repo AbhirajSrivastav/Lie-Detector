@@ -175,22 +175,22 @@ async def start_test(session_id: str):
     if session_id not in active_sessions:
         raise HTTPException(status_code=404, detail="Session not found")
     
-    try:
-        baseline_summary = baseline_service.get_baseline_summary()
-        
-        if not baseline_summary:
-            raise HTTPException(status_code=400, detail="Calibration not completed")
-        
-        active_sessions[session_id]['phase'] = 'TEST'
-        
-        return {
-            "status": "success",
-            "baseline_summary": baseline_summary,
-            "message": "Ready to begin test phase. Answer questions naturally."
-        }
-    except Exception as e:
-        logger.error(f"Test start failed: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+    # Check if calibration time has elapsed, if so finalize it
+    if baseline_service.is_calibration_complete():
+        baseline_service.finalize_calibration()
+    
+    baseline_summary = baseline_service.get_baseline_summary()
+    
+    if not baseline_summary:
+        raise HTTPException(status_code=400, detail="Calibration not completed. Please complete 60-second calibration first.")
+    
+    active_sessions[session_id]['phase'] = 'TEST'
+    
+    return {
+        "status": "success",
+        "baseline_summary": baseline_summary,
+        "message": "Ready to begin test phase. Answer questions naturally."
+    }
 
 
 @app.get("/results/{session_id}")
@@ -358,27 +358,35 @@ async def process_audio_chunk(session_id: str, websocket: WebSocket, data: Dict)
 # ERROR HANDLERS
 # ============================================================================
 
+from fastapi.responses import JSONResponse
+
 @app.exception_handler(HTTPException)
 async def http_exception_handler(request, exc):
     """Handle HTTP exceptions."""
-    return {
-        "status": "error",
-        "code": exc.status_code,
-        "message": exc.detail,
-        "timestamp": datetime.now().isoformat()
-    }
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "status": "error",
+            "code": exc.status_code,
+            "message": exc.detail,
+            "timestamp": datetime.now().isoformat()
+        }
+    )
 
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request, exc):
     """Handle unexpected exceptions."""
     logger.error(f"Unhandled exception: {exc}")
-    return {
-        "status": "error",
-        "code": 500,
-        "message": "Internal server error",
-        "timestamp": datetime.now().isoformat()
-    }
+    return JSONResponse(
+        status_code=500,
+        content={
+            "status": "error",
+            "code": 500,
+            "message": "Internal server error",
+            "timestamp": datetime.now().isoformat()
+        }
+    )
 
 
 # ============================================================================
