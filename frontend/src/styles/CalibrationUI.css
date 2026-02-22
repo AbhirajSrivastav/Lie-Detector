@@ -1,0 +1,130 @@
+/* CalibrationUI.css - Calibration component styles */
+
+.calibration-container {
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calibration-phase {
+  text-align: center;
+}
+
+.calibration-phase h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.calibration-phase p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.countdown {
+  font-size: 72px;
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 30px 0;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.instruction-text {
+  background: #f3f4f6;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-style: italic;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  transition: width 0.3s ease;
+}
+
+.time-remaining {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3b82f6;
+  margin-bottom: 20px;
+}
+
+.metrics-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.metric {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.metric label {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.metric .value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #3b82f6;
+}
+
+.hint {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.baseline-summary {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.baseline-summary p {
+  margin: 10px 0;
+  color: #166534;
+}
+
+.baseline-summary strong {
+  color: #15803d;
+}

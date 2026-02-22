@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="Multimodal Stress Detection - Advanced biometric analysis system for educational and research purposes."
+    />
+    <meta name="og:title" content="Multimodal Stress Detection App" />
+    <meta name="og:description" content="Advanced biometric analysis system" />
+    <meta name="og:type" content="website" />
+
+    <title>Multimodal Stress Detection</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body,
+      #root {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+          'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+      }
+
+      /* Loading indicator */
+      .app-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .loader {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 16px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="padding: 40px; text-align: center; color: white;">
+        <h1>JavaScript Required</h1>
+        <p>This application requires JavaScript to be enabled. Please enable JavaScript in your browser settings.</p>
+      </div>
+    </noscript>
+
+    <div id="root">
+      <div class="app-loading">
+        <div class="loader"></div>
+        <div>Loading Multimodal Stress Detection...</div>
+      </div>
+    </div>
+
+    <!-- For WebRTC and WebSocket support -->
+    <script>
+      // Polyfill check for old browsers
+      if (!navigator.mediaDevices) {
+        console.warn('MediaDevices API not supported');
+      }
+      if (!window.AudioContext && !window.webkitAudioContext) {
+        console.warn('Web Audio API not supported');
+      }
+    </script>
+  </body>
+</html>
